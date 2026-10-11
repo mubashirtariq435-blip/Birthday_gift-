@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday!</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 50%, #fbc2eb 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            color: #333;
+            position: relative;
+        }
+
+        .balloon {
+            position: fixed;
+            bottom: -100px;
+            width: 40px;
+            height: 50px;
+            border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+            animation: floatUp 8s ease-in infinite;
+            z-index: 1;
+        }
+
+        .balloon:before {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 40px;
+            background: rgba(0,0,0,0.3);
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-110vh) rotate(20deg); opacity: 0; }
+        }
+
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            top: -20px;
+            z-index: 999;
+            animation: fall 5s linear forwards;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: 4.2rem;
+            color: #fff;
+            text-shadow: 0 0 20px rgba(255, 105, 180, 0.8);
+            margin-bottom: 10px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .name {
+            font-size: 2.5rem;
+            color: #ff1493;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .cake {
+            font-size: 5rem;
+            margin: 15px 0;
+            animation: bounce 1.5s ease infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .wishes-box {
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            padding: 35px 25px;
+            margin: 30px auto;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            max-width: 700px;
+        }
+
+        .wish {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 14px;
+            padding: 12px 18px;
+            background: linear-gradient(90deg, #fff0f5, #ffe4e1);
+            border-radius: 15px;
+            border-left: 5px solid #ff69b4;
+        }
+
+        /* Quiz Section */
+        .quiz-box {
+            background: rgba(255, 255, 255, 0.92);
+            border-radius: 25px;
+            padding: 30px 25px;
+            margin: 35px auto;
+            max-width: 600px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+        }
+
+        .quiz-box h2 {
+            color: #ff1493;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+        }
+
+        .question {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin: 25px 0 15px;
+            color: #333;
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+
+        .btn {
+            padding: 14px 36px;
+            font-size: 1.15rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+        }
+
+        .btn-yes {
+            background: linear-gradient(135deg, #00b894, #00cec9);
+            color: white;
+        }
+
+        .btn-yes:hover {
+            transform: scale(1.08);
+            box-shadow: 0 8px 20px rgba(0,184,148,0.4);
+        }
+
+        .btn-no {
+            background: linear-gradient(135deg, #ff7675, #d63031);
+            color: white;
+        }
+
+        .btn-no:hover {
+            transform: scale(1.08);
+            box-shadow: 0 8px 20px rgba(214,48,49,0.4);
+        }
+
+        /* Special style for disabled No button */
+        .btn-no-disabled {
+            background: #b2bec3;
+            color: #636e72;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .btn-no-disabled:hover {
+            transform: none;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+        }
+
+        .footer {
+            margin-top: 40px;
+            color: #fff;
+            font-size: 1.1rem;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+
+        .heart {
+            color: #ff1493;
+            animation: heartbeat 1.2s ease infinite;
+            display: inline-block;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 2.8rem; }
+            .name { font-size: 1.9rem; }
+            .cake { font-size: 3.8rem; }
+            .btn { padding: 12px 28px; font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Happy Birthday!</h1>
+        <div class="name">Dear Friend ❤️</div>
+
+        <div class="cake">🎂</div>
+
+        <div class="wishes-box">
+            <div class="wish">🎉 May your birthday be filled with endless joy, laughter, and all the happiness your heart can hold!</div>
+            <div class="wish">🌟 Wishing you a year ahead full of success, good health, amazing adventures, and beautiful memories.</div>
+            <div class="wish">💖 You are an incredible person who lights up every room. May this special day bring you everything you’ve been dreaming of!</div>
+            <div class="wish">🥳 Another year older, another year wiser, and another year more amazing! Keep shining bright!</div>
+        </div>
+
+        <!-- Quiz Section -->
+        <div class="quiz-box">
+            <h2>✨ Quick Fun Questions ✨</h2>
+
+            <!-- Question 1 -->
+            <div class="question">Are you ready for a surprise? 🎁</div>
+            <div class="btn-group">
+                <button class="btn btn-yes" onclick="window.location.href='surprise.html'">Yes</button>
+                <button class="btn btn-no" onclick="window.location.href='maybe-later.html'">No</button>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="question">Do you like this birthday page? 😊</div>
+            <div class="btn-group">
+                <button class="btn btn-yes" onclick="window.location.href='thankyou.html'">Yes</button>
+                <button class="btn btn-no-disabled" onclick="return false;">No</button>
+            </div>
+            <p style="margin-top: 8px; font-size: 0.9rem; color: #666;">(The "No" button is disabled on purpose 😉)</p>
+        </div>
+
+        <div class="footer">
+            Made with <span class="heart">♥</span> just for you<br>
+            Have the most wonderful birthday ever!
+        </div>
+    </div>
+
+    <script>
+        // Balloons
+        const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#ffeaa7', '#fd79a8', '#a29bfe', '#00b894'];
+        
+        function createBalloon() {
+            const balloon = document.createElement('div');
+            balloon.className = 'balloon';
+            balloon.style.left = Math.random() * 100 + 'vw';
+            balloon.style.background = colors[Math.floor(Math.random() * colors.length)];
+            balloon.style.animationDuration = (6 + Math.random() * 5) + 's';
+            balloon.style.animationDelay = Math.random() * 3 + 's';
+            document.body.appendChild(balloon);
+            setTimeout(() => balloon.remove(), 12000);
+        }
+
+        for (let i = 0; i < 20; i++) {
+            setTimeout(createBalloon, i * 300);
+        }
+        setInterval(createBalloon, 900);
+
+        // Confetti
+        function createConfetti() {
+            const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff', '#ff8000'];
+            for (let i = 0; i < 120; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.width = (6 + Math.random() * 8) + 'px';
+                confetti.style.height = (6 + Math.random() * 8) + 'px';
+                confetti.style.animationDuration = (3 + Math.random() * 3) + 's';
+                confetti.style.animationDelay = Math.random() * 1.5 + 's';
+                document.body.appendChild(confetti);
+                setTimeout(() => confetti.remove(), 6000);
+            }
+        }
+
+        window.onload = () => {
+            createConfetti();
+            setTimeout(createConfetti, 1800);
+        };
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surprise! 🎉</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;600&display=swap');
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin: 0;
+            padding: 20px;
+        }
+        .box {
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(12px);
+            padding: 50px 40px;
+            border-radius: 30px;
+            max-width: 600px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+        }
+        h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(255,255,255,0.5);
+        }
+        p {
+            font-size: 1.3rem;
+            line-height: 1.7;
+            margin-bottom: 30px;
+        }
+        .big-emoji {
+            font-size: 5rem;
+            margin: 20px 0;
+            animation: bounce 1.2s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 14px 35px;
+            background: white;
+            color: #a18cd1;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: 0.3s;
+        }
+        a:hover {
+            transform: scale(1.08);
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="big-emoji">🎁✨🎉</div>
+        <h1>Surprise!</h1>
+        <p>
+            You are the most special person!<br>
+            May this new year of your life be filled with<br>
+            endless happiness, love, success and magical moments.<br><br>
+            You deserve the absolute best! 💖
+        </p>
+        <a href="index.html">← Back to Birthday Page</a>
+    </div>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maybe Later 😊</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;600&display=swap');
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin: 0;
+            padding: 20px;
+        }
+        .box {
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(12px);
+            padding: 50px 40px;
+            border-radius: 30px;
+            max-width: 550px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+        }
+        h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 1.25rem;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+        .emoji {
+            font-size: 4.5rem;
+            margin-bottom: 15px;
+        }
+        a {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 14px 35px;
+            background: white;
+            color: #66a6ff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        a:hover {
+            transform: scale(1.08);
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="emoji">😌🎈</div>
+        <h1>Okay... Maybe Later!</h1>
+        <p>
+            No problem at all!<br>
+            The surprise will wait for you.<br>
+            Whenever you're ready, just come back ❤️
+        </p>
+        <a href="index.html">← Back to Birthday Page</a>
+    </div>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You! 💖</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;600&display=swap');
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin: 0;
+            padding: 20px;
+        }
+        .box {
+            background: rgba(255,255,255,0.25);
+            backdrop-filter: blur(12px);
+            padding: 50px 40px;
+            border-radius: 30px;
+            max-width: 600px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+        }
+        h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: 3.3rem;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 1.3rem;
+            line-height: 1.7;
+        }
+        .big-heart {
+            font-size: 5rem;
+            animation: heartbeat 1.1s infinite;
+        }
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.25); }
+        }
+        a {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 14px 35px;
+            background: white;
+            color: #ff6b81;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        a:hover {
+            transform: scale(1.08);
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="big-heart">💖</div>
+        <h1>Yayyy! Thank You!</h1>
+        <p>
+            I'm so happy you liked it!<br>
+            You made my day by saying Yes 🥰<br><br>
+            Wishing you the happiest birthday ever!<br>
+            Stay amazing always ✨
+        </p>
+        <a href="index.html">← Back to Birthday Page</a>
+    </div>
+</body>
+</html>
+
